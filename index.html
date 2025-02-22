@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Jogo da Velha 🎮</title>
+    
+    <meta name="theme-color" content="#121214">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="theme-switch">
+                <button id="btn-theme">☀️</button>
+            </div>
+
+            <div class="painel-opcoes esconder">
+                <div class="painel-group">
+                    <span id="painel-usuario-x-nome"></span>   
+                    <span class="pontos">Pontos: <strong id="painel-usuario-x-pontos">0</strong></span>
+                </div>
+
+                <div class="painel-group">
+                    <span id="painel-usuario-o-nome"></span>
+                    <span class="pontos"> Pontos: <strong id="painel-usuario-o-pontos">0</strong></span>
+                </div>
+
+                <div class="proximo-jogar">
+                    <em><span>Próximo:</span> <strong id="proximo-jogador"></strong></em>
+                </div>
+
+                <button id="btn-reset">RESET</button>
+            </div>
+
+            <div class="opcoes-jogo">
+                <div class="header-group">
+                    <label for="usuario-x">Jogador  1️⃣ </label>
+                    <input autocomplete="on" id="usuario-x" type="text">
+                </div>
+    
+                <div class="header-group">
+                    <label for="usuario-o">Jogador  2️⃣</label>
+                    <input autocomplete="on" id="usuario-o" type="text">
+                </div>
+
+                <button id="btn-jogar">PLAY</button>
+            </div>
+        </header>
+        
+        <div class="jogo-velha-1"></div>
+        <div class="jogo-velha-2"></div>
+        <div class="jogo-velha-3"></div>
+        <div class="jogo-velha-4"></div>
+        <div class="jogo-velha-5"></div>
+        <div class="jogo-velha-6"></div>
+        <div class="jogo-velha-7"></div>
+        <div class="jogo-velha-8"></div>
+        <div class="jogo-velha-9"></div>
+
+        <footer>
+            <em><h4>Desenvolvido por Igor M. L - 2024</h4></em>
+        </footer>
+    </div>
+
+    <div class="modal-overlay esconder">
+        <div class="modal-vitoria">
+            <h2>🎉 Parabéns!</h2>
+            <p class="vencedor-nome"></p>
+            <div class="modal-buttons">
+                <button class="continuar">Continuar Jogando</button>
+                <button class="reiniciar">Reiniciar Jogo</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

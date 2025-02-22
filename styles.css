@@ -1,0 +1,536 @@
+:root {
+    --color-primary: #8B31B5;
+    --color-secundary: #B15FD8;
+    --color-geral: #1a1a1a;
+    --font-color: #ffffff;
+    --shadow-color: rgba(139, 49, 181, 0.3);
+}
+
+[data-theme="light"] {
+    --color-primary: #B15FD8;
+    --color-secundary: #D196ED;
+    --color-geral: #f5f5f5;
+    --font-color: #333333;
+    --shadow-color: rgba(177, 95, 216, 0.2);
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(45deg, 
+        var(--color-geral), 
+        rgba(139, 49, 181, 0.1),
+        var(--color-geral));
+    background-size: 200% 200%;
+    animation: gradientBG 15s ease infinite;
+    color: var(--font-color);
+    transition: all 0.3s ease;
+}
+
+.header-group > label {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+
+.painel-group {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.proximo-jogar {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.proximo-jogar strong {
+    font-weight: 700;
+}
+
+#btn-jogar, #btn-reset, #btn-theme {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+footer {
+    grid-area: f;
+    text-align: center;
+    padding: 20px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);  /* Reduzido de 180px para 100px */
+    grid-template-rows: auto repeat(3, 100px) auto;  /* Reduzido de 180px para 100px */
+    grid-template-areas: 
+        "h h h"
+        "v1 v2 v3"
+        "v4 v5 v6"
+        "v7 v8 v9"
+        "f f f";
+    gap: 12px;  /* Reduzido de 15px para 10px */
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+header {
+    grid-area: h;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.theme-switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#btn-theme {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color-primary);
+    color: var(--font-color);
+    font-size: 22px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+#btn-theme:hover {
+    transform: scale(1.1);
+    background-color: var(--color-secundary);
+}
+
+.opcoes-jogo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "hgx bg" "hgo bg";
+    gap: 30px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px var(--shadow-color);
+}
+
+.header-group:first-child {
+    grid-area: hgx;
+}
+
+.header-group:last-child {
+    grid-area: hgo;
+}
+
+#btn-jogar {
+    grid-area: bg;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: var(--font-color);
+    font-size: 22px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px var(--shadow-color);
+    justify-self: end;
+    align-self: center;
+    margin-right: 20px;
+}
+
+#btn-jogar:hover {
+    transform: scale(1.05);
+    background-color: var(--color-secundary);
+}
+
+@keyframes jogadaFeita {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.container > div:not(header):not(footer) {
+    background-color: var(--color-primary);
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.container > div:not(header):not(footer).jogada {
+    animation: jogadaFeita 0.4s ease-out forwards;
+}
+
+/* Melhorar transições globais */
+*, *::before, *::after {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Melhorar efeito hover dos botões */
+#btn-jogar:hover, #btn-reset:hover, #btn-theme:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px var(--shadow-color);
+    background: linear-gradient(145deg, var(--color-primary), var(--color-secundary));
+}
+
+/* Melhorar efeito hover das células do jogo */
+.container > div:not(header):not(footer):hover {
+    transform: translateY(-2px) scale(1.02);
+    background: linear-gradient(145deg, var(--color-primary), var(--color-secundary));
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+/* Melhorar efeito hover dos inputs */
+.header-group > input:hover {
+    border-color: var(--color-secundary);
+    box-shadow: 0 4px 20px var(--shadow-color);
+    transform: translateY(-1px);
+}
+
+/* Melhorar efeito hover do painel de grupo */
+.painel-group:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.container > div:not(header):not(footer):hover {
+    transform: scale(1.03);
+    background-color: var(--color-secundary);
+    box-shadow: 0 6px 20px var(--shadow-color);
+}
+
+.painel-opcoes {
+    width: 90%;
+    max-width: 450px;  /* Reduzido para melhor proporção */
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px var(--shadow-color);
+}
+
+#btn-reset {
+    display: block;
+    width: calc(100% - 40px);  /* Largura total menos padding */
+    height: 50px;
+    margin: 20px auto;
+    padding: 0 20px;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--color-primary);
+    color: var(--font-color);
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+#btn-reset:hover {
+    transform: scale(1.02);  /* Reduzido scale para combinar com a largura maior */
+    background-color: var(--color-secundary);
+}
+
+.painel-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.painel-group strong {
+    color: var(--color-secundary);
+    font-size: 24px;
+    margin-left: 8px;
+}
+
+.proximo-jogar {
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--color-primary);
+    text-align: center;
+    margin: 25px 0;
+    font-size: 22px;
+}
+
+.proximo-jogar strong {
+    color: var(--color-secundary);
+    font-size: 24px;
+    margin-left: 8px;
+    text-transform: uppercase;
+}
+
+#btn-reset {
+    display: block;
+    width: 100%;    /* Modificado de 200px para 100% */
+    height: 50px;
+    margin: 20px 0; /* Modificado margin auto para 20px 0 */
+    border: none;
+    border-radius: 12px; /* Ajustado para combinar com outros elementos */
+    background-color: var(--color-primary);
+    color: var(--font-color);
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.painel-opcoes {
+    width: 90%;
+    max-width: 800px;
+    padding: 25px;   /* Aumentado padding para dar mais espaço interno */
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px var(--shadow-color);
+}
+
+#btn-reset:hover {
+    transform: scale(1.05);
+    background-color: var(--color-secundary);
+}
+
+footer {
+    grid-area: f;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.winner {
+    animation: winPulse 0.5s ease-in-out infinite;
+}
+
+@keyframes winPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.esconder {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(3, 80px);
+        grid-template-rows: auto repeat(3, 80px) auto;
+        gap: 8px;
+        padding: 15px;
+    }
+
+    .painel-opcoes {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .painel-group {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    .proximo-jogar {
+        font-size: 18px;
+        padding: 10px;
+        margin: 15px 0;
+    }
+
+    .proximo-jogar strong {
+        font-size: 20px;
+    }
+
+    .header-group > label {
+        font-size: 16px;
+    }
+
+    .header-group > input {
+        width: 150px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: repeat(3, 70px);
+        grid-template-rows: auto repeat(3, 70px) auto;
+        gap: 6px;
+    }
+
+    .theme-switch {
+        top: 10px;
+        right: 10px;
+    }
+
+    #btn-theme {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    footer {
+        font-size: 12px;
+        padding: 15px;
+    }
+}
+.header-group > label {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--font-color);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.header-group > input {
+    width: 250px;
+    height: 45px;
+    padding: 0 15px;
+    border: 2px solid var(--color-primary);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--font-color);
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.header-group > input:focus {
+    outline: none;
+    border-color: var(--color-secundary);
+    box-shadow: 0 0 20px var(--shadow-color);
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.header-group > input::placeholder {
+    color: var(--font-color);
+    opacity: 0.5;
+}
+```css
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+}
+
+.modal-vitoria {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secundary));
+    text-align: center;
+    animation: deslizarBaixo 0.5s ease-out;
+    z-index: 9999;
+}
+
+.vencedor-nome {
+    font-size: 72px;
+    color: var(--font-color);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin: 20px 0;
+    animation: brilhar 2s infinite;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    padding: 12px 25px;
+    margin: 0 10px;
+    font-size: 20px;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--font-color);
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.modal-buttons button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+@keyframes deslizarBaixo {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes brilhar {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .vencedor-nome {
+        font-size: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .vencedor-nome {
+        font-size: 36px;
+    }
+}
